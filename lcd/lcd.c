@@ -27,24 +27,10 @@ void lcdInit(){
 		lcdCommands(0x0F);               //Display On
 		
 };
-void lcdCommands(char Command){
-	
-	
-  GPIO_PORTA_DATA_R= 0x00;            //Rs A5 = 0 as command , Rw A6 =0 as write ,En=0
-	GPIO_PORTA_DATA_R= Command;         //initializing
-	
-	GPIO_PORTA_DATA_R |= 0x80;          //EN FROM HIGH TO LOW PIN7
-	delayMilli(0);
-	
-	GPIO_PORTA_DATA_R= 0x00;  
-	if(Command < 0x04) delayMilli(2); else delayMilli(37); 
-	
-}
+
 
 void delayMilli(int n){
 int i,j;
-for(i=0;i<n;i++)
-for(j=0;j<3180;j++)
-{}
+
 }
 
