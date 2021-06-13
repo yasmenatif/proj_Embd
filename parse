@@ -1,0 +1,81 @@
+
+	double parsing(){
+	do {
+      charRead =  UART2_Read();  	
+      if(charRead == '$') 
+				
+			{     
+	  i = 0;
+	  LinesReadNO++;
+	  ReadString[i] = charRead;
+	  do {
+	     charRead = UART2_Read();
+	     if( (charRead != '\0') && (isalnum(charRead) ||  isspace(charRead) || ispunct(charRead)) ) {
+		i++;
+		ReadString[i] = charRead;
+	     }
+	  } while(charRead != CR); // which is last info in gps string line
+
+	  
+	  // Appending the null terminator to the string read 
+	  ReadString[i+1] = '\0';
+
+	  // analyze the message to know whther its $GPGGA or not
+	  j = 0;
+	  pChar = ReadString;
+	  while(*(pChar+j) != COMMA) {
+	       Stringtemp[j] = *(pChar+j);
+	       j++;
+	  }
+	  Stringtemp[j] = '\0';
+
+	  if(Stringtemp[3] == 'G' && Stringtemp[4] == 'G' && Stringtemp[5] == 'A') {
+	     
+	      pChar = ReadString;
+
+	      //Now we'll get latitude
+	      pChar = ReadString;
+	      j = lastCommaPosition + 1;
+	      k = 0;
+	      while(*(pChar+j) != COMMA) {
+		   Stringlatitude[k] = *(pChar+j);
+		   j++;
+		   k++;
+	      }
+	      lastCommaPosition = j;
+	      Stringlatitude[k] = '\0';
+
+	      sscanf( Stringlatitude , "%f", &latitude);
+	      latitudeDegrees = (int)(latitude/100);
+	      latitudeMinutes = (double)(latitude - latitudeDegrees*100);
+				latitude_ = latitudeDegrees + (latitudeMinutes/60);
+	      return latitude;
+
+	      // Get lattitude Cardinal direction 
+	      pChar = ReadString;
+	      j = lastCommaPosition + 1;
+	      k = 0;
+	      while(*(pChar+j) != COMMA) {
+		   StringlatitudeCardinal[k] = *(pChar+j);
+		   j++;
+		   k++;
+	      }
+	      lastCommaPosition = j;
+	      StringlatitudeCardinal[k] = '\0';
+	      printf(" %s", StringlatitudeCardinal);
+
+
+	
+}
+int main(){
+	UART0_INIT();
+        UART2_INIT();
+        delayMilli(5);
+        init();
+        delayMilli(5);
+        lcdInit();
+        delayMilli(3);
+        lcdCommands(0x01);
+        delayMilli(1);
+ 
+}
