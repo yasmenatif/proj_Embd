@@ -33,8 +33,13 @@ double RadianToDegree(double radian) {
 }
 
 int main() {
-    double Y;
-    Y = TotalDistance(34.45, 43.54, 43.54, 32.43);
+    double Y, double total = 0;
+    Y = TotalDistance(, , , );
+    total += TotalDistance;   //calculating the total distance by adding distance travelled
     printf("TotalDistance =%lf", Y);
 
 }
+
+
+
+
