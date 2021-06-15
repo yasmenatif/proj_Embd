@@ -3,7 +3,7 @@
 void SystemInit(){}
 void init_PortA_PortB (){
 SYSCTL_RCGCGPIO_R |= 0x01; //Enable PORTA clock
-while((SYSCTL_PRGPIO_R & 0x02)==0){};
+while((SYSCTL_PRGPIO_R & 0x01)==0){};
 SYSCTL_RCGCGPIO_R |= 0x02; //Enable PORT B clock
 while((SYSCTL_PRGPIO_R & 0x02)==0){};
 GPIO_PORTA_DIR_R |=0xE0; //PORTA pins 5-6-7 controls RS,E and R/W
