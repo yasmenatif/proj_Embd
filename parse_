@@ -52,7 +52,7 @@ double latitude_;
 			{     
 	  i = 0;
 	  LinesReadNO++;
-	  ReadString[i] = charRead;
+	  
 	  do {
 	     charRead = UART2_Read();
 	     if( (charRead != '\0') && (isalnum(charRead) ||  isspace(charRead) || ispunct(charRead)) ) {
