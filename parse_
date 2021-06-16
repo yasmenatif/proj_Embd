@@ -46,7 +46,7 @@ double latitude_;
 
 	double parsing(){
 	do {
-      charRead =  UART2_Read();  	
+       	
       if(charRead == '$') 
 				
 			{     
