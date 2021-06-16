@@ -90,7 +90,7 @@ double latitude_;
 	      lastCommaPosition = j;
 	      Stringlatitude[k] = '\0';
 
-	      sscanf( Stringlatitude , "%f", &latitude);
+	      sscanf( Stringlatitude , "%lf", &latitude);
 	      latitudeDegrees = (int)(latitude/100);
 	      latitudeMinutes = (double)(latitude - latitudeDegrees*100);
 				latitude_ = latitudeDegrees + (latitudeMinutes/60);
